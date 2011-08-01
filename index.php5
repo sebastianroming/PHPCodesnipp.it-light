@@ -23,7 +23,7 @@ try {
 }
 
 // request API status
-$status = $test->apiCall('status', 	array('auth_token'=>$authToken), 'POST');
+$status = $test->apiCall('status', 	null, 'POST');
 
 // list of available methods
 $methods = $test->apiCall('listMethods');
@@ -36,7 +36,7 @@ $timeline_everyone = $test->apiCall('timeline/everyone', array('limit'=>10), 'PO
 
 // adding a snipp.it (private snipp.it, category: JavaScript)
 $snippit_body = '<script>document.getElementById("test");</script>';
-$snippit_add = $test->apiCall('snippit/add', array('snippit_name'=>'PHPCodesnipp.it API Test', 'snippit_type'=>8, 'snippit_body'=>$snippit_body, 'snippit_category'=>9, 'snippit_tags'=>'test,api,codesnipp.it', 'auth_token'=>$authToken), 'POST');
+$snippit_add = $test->apiCall('snippit/add', array('snippit_name'=>'PHPCodesnipp.it API Test', 'snippit_type'=>8, 'snippit_body'=>$snippit_body, 'snippit_category'=>9, 'snippit_tags'=>'test,api,codesnipp.it'), 'POST');
 
 // request user information
 $user = $test->apiCall('view_user/sebastian');

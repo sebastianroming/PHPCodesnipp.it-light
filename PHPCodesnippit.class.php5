@@ -26,6 +26,7 @@ class PHPCodesnippit {
 	 * Private members
 	 */
 	private $_availableRequestMethods = array('GET', 'POST');
+	private $_authToken = false;
 
 	
 	// --------------------------------------------------
@@ -67,9 +68,9 @@ class PHPCodesnippit {
 				
 			}
 			
-			$authToken = $authResult[0]->token;
+			$this->_authToken = $authResult[0]->token;
 			
-			return $authToken;
+			return $this->_authToken;
 			exit;
 			
 		}
@@ -81,6 +82,10 @@ class PHPCodesnippit {
 			foreach ($params as $key => $param) {
 				$this->setPostParam(array($key=>$param));
 			}
+		}
+		
+		if ($this->_authToken !== false) {
+			$this->setPostParam(array('auth_token'=>$this->_authToken));
 		}
 		
 		$result = $this->_request();
