@@ -5,7 +5,7 @@
  * PLEASE DO NOT TOUCH THIS FILE
  * 
  * @author Sebastian Roming
- * @license tba
+ * @license CC-BY-SA 3.0
  */
 
 class PHPCodesnippit {
@@ -26,17 +26,25 @@ class PHPCodesnippit {
 	 * Private members
 	 */
 	private $_availableRequestMethods = array('GET', 'POST');
+
 	
-	
-	/**
-	 * Public methods
-	 */
 	// --------------------------------------------------
-	public function __construct() {
+	/**
+	 * constructor
+	 */
+	public function __construct() { 
 		
 	}
 	
 	// --------------------------------------------------
+	/**
+	 * Does the request to the API
+	 * 
+	 * @param string $methodName
+	 * @param array $params
+	 * @param string $requestType
+	 * @return mixed
+	 */
 	public function apiCall($methodName, Array $params = null, $requestType = 'GET') {
 		
 		$this->_clearParams();
@@ -71,7 +79,7 @@ class PHPCodesnippit {
 		
 		if ($params !== null) {
 			foreach ($params as $key => $param) {
-				$this->setParam(array($key=>$param));
+				$this->setPostParam(array($key=>$param));
 			}
 		}
 		
@@ -82,6 +90,11 @@ class PHPCodesnippit {
 	}
 	
 	// --------------------------------------------------
+	/**
+	 * Sets the request method for cURL request (POST/GET)
+	 * 
+	 * @param string $requestMethod
+	 */
 	public function setRequestMethod($requestMethod='GET') {
 		
 		if (!in_array($requestMethod, $this->_availableRequestMethods)) {
@@ -93,6 +106,11 @@ class PHPCodesnippit {
 	}
 	
 	// --------------------------------------------------
+	/**
+	 * Sets URL params for the API Endpoint
+	 * 
+	 * @param string $urlParam
+	 */
 	public function setUrlParam($urlParam) {
 
 		$this->_urlParams[] = $urlParam;
@@ -100,17 +118,24 @@ class PHPCodesnippit {
 	}	
 	
 	// --------------------------------------------------
-	public function setParam($param) {
+	/**
+	 * Sets POST Params for the API request
+	 * 
+	 * @param mixed $param
+	 */
+	public function setPostParam($param) {
 		
 		$this->_params[] = $param;
 		
 	}
 	
-	
-	/**
-	 * Protected methods
-	 */
 	// --------------------------------------------------
+	/**
+	 * Builds the URL that points to the API Endpoint and
+	 * starts the cURL request
+	 * 
+	 * @return mixed
+	 */
 	protected function _request() {
 		
 		$url = $this->apiEndpoint;
@@ -161,11 +186,10 @@ class PHPCodesnippit {
 		
 	}
 	
-	
-	/**
-	 * Private methods
-	 */
 	// --------------------------------------------------
+	/**
+	 * Clears all URL and POST params
+	 */
 	private function _clearParams() {
 		$this->_urlParams = array();
 		$this->_params = array();
