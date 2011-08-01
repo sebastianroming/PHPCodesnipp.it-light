@@ -1,3 +1,8 @@
 This project is still in progress. 
 
 For a full documentation of the API, please check the official API documentation at http://codesnipp.it/api.
+
+EVENT_TYPES
+	2 = EVENT_ADD
+	4 = EVENT_QUESTION
+	8 = EVENT_PRIVATE (requires Ninja-Account)

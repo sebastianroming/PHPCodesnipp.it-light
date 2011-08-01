@@ -1,6 +1,6 @@
 <?php 
 /**
- * PHPCodesnipp.it
+ * PHPCodesnipp.it-LIGHT
  * 
  * PLEASE DO NOT TOUCH THIS FILE
  * 
@@ -62,7 +62,6 @@ class PHPCodesnippit {
 			$authToken = $authResult[0]->token;
 			
 			return $authToken;
-			
 			exit;
 			
 		}
@@ -126,7 +125,7 @@ class PHPCodesnippit {
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_HEADER, false);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_USERAGENT, 'PHPCodesnipp.it/0.0.1a by sebastianroming');
+		curl_setopt($ch, CURLOPT_USERAGENT, 'PHPCodesnipp.it/0.1b by sebastianroming');
 		
 		if ($this->_requestMethod == 'POST') {
 			
@@ -134,7 +133,17 @@ class PHPCodesnippit {
 				
 				$postFields = '';
 				foreach ($this->_params as $key => $value) {
-					$postFields .= $key . '=' . $value . '&';
+					
+					if (is_array($value)) {
+						
+						foreach ($value as $k => $v) {
+							$postFields .= $k . '=' . $v . '&';
+						}
+						
+					} else {
+						$postFields .= $key . '=' . $value . '&';
+					}
+					
 				}
 				rtrim($postFields, '&');
 				
